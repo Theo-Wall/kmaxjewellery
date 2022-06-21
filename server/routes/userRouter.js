@@ -1,7 +1,6 @@
 import express from 'express'
 import cloudinary from '../utils/cloudinary.js'
 import upload from '../utils/multer.js'
-import stripe from 'stripe'
 import {
   findUserAndUpdate,
   findAllUser,
@@ -12,9 +11,6 @@ import User from '../models/userModel.js'
 import bcrypt from 'bcrypt'
 const saltRounds = 10
 const router = express.Router()
-
-
-const stripeConfig = stripe(process.env.STRIPE_PRIVATE_KEY)
 
 //GET endpoint || description: http://localhost:3001/api/welcome
 router.get('/welcome', (_, res) => {

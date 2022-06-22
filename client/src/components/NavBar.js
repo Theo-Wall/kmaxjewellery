@@ -11,11 +11,13 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { useTheme } from "@emotion/react";
 
 const pages = ["Crumbs", "Creations", "Me", "Contact"];
 
 const NavBar = ({ children }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const theme = useTheme();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -29,7 +31,7 @@ const NavBar = ({ children }) => {
     <>
       <Box>
         <AppBar
-          position="relative"
+          position="fixed"
           sx={{ background: "white", m: 0, boxShadow: 0 }}
         >
           <Container maxWidth="xl">
@@ -43,9 +45,7 @@ const NavBar = ({ children }) => {
                   mr: 2,
                   display: { xs: "none", md: "flex" },
                   fontWeight: 800,
-                  fontFamily: "Fira Sans",
-                  // letterSpacing: ".3rem",
-                  color: "#AC1F2D",
+                  color: theme.palette.secondary.main,
                   textDecoration: "none",
                   margin: "0",
                 }}
@@ -61,9 +61,7 @@ const NavBar = ({ children }) => {
                   mr: 2,
                   display: { xs: "none", md: "flex" },
                   fontWeight: 800,
-                  fontFamily: "Fira Sans",
-                  // letterSpacing: ".3rem",
-                  color: "black",
+                  color: theme.palette.primary.main,
                   textDecoration: "none",
                 }}
               >
@@ -119,8 +117,7 @@ const NavBar = ({ children }) => {
                   mr: 2,
                   display: { xs: "flex", md: "none" },
                   fontWeight: 800,
-                  fontFamily: "Fira Sans",
-                  color: "#AC1F2D",
+                  color: theme.palette.secondary.main,
                   textDecoration: "none",
                   margin: "0",
                 }}
@@ -136,8 +133,7 @@ const NavBar = ({ children }) => {
                   mr: 2,
                   display: { xs: "flex", md: "none" },
                   fontWeight: 800,
-                  fontFamily: "Fira Sans",
-                  color: "black",
+                  color: theme.palette.primary.main,
                   textDecoration: "none",
                 }}
               >
@@ -150,9 +146,8 @@ const NavBar = ({ children }) => {
                     onClick={handleCloseNavMenu}
                     sx={{
                       my: 2,
-                      color: "black",
+                      color: theme.palette.primary.main,
                       display: "block",
-                      fontFamily: "Fira Sans",
                       fontWeight: 700,
                       fontSize: "24px",
                     }}
@@ -172,7 +167,64 @@ const NavBar = ({ children }) => {
             </Toolbar>
           </Container>
         </AppBar>
-        {children}
+        <Box>{children}</Box>
+        <Box
+          sx={{
+            height: "100px",
+            m: 2,
+            borderTop: "1px solid lightGrey",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              mt: "35px",
+            }}
+          >
+            <Typography
+              variant="h6"
+              component="a"
+              sx={{
+                fontWeight: 800,
+                color: theme.palette.primary.main,
+                textDecoration: "none",
+              }}
+            >
+              Copyright &copy;
+            </Typography>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontWeight: 800,
+                color: theme.palette.secondary.main,
+                textDecoration: "none",
+                margin: "0",
+              }}
+            >
+              KMAX
+            </Typography>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontWeight: 800,
+                color: theme.palette.primary.main,
+                textDecoration: "none",
+              }}
+            >
+              Jewellery | {new Date().getFullYear()}
+            </Typography>
+          </Box>
+        </Box>
       </Box>
     </>
   );

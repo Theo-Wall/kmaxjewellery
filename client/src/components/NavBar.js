@@ -11,12 +11,15 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import Logo from "./Logo";
 import { useTheme } from "@emotion/react";
+import { useNavigate } from "react-router-dom";
 
 const pages = ["Crumbs", "Creations", "Me", "Contact"];
 
 const NavBar = ({ children }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate();
   const theme = useTheme();
 
   const handleOpenNavMenu = (event) => {
@@ -36,38 +39,7 @@ const NavBar = ({ children }) => {
         >
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontWeight: 800,
-                  color: theme.palette.secondary.main,
-                  textDecoration: "none",
-                  margin: "0",
-                }}
-              >
-                KMAX
-              </Typography>
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontWeight: 800,
-                  color: theme.palette.primary.main,
-                  textDecoration: "none",
-                }}
-              >
-                Jewellery
-              </Typography>
-
+              <Logo />
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                 <IconButton
                   size="large"
@@ -108,53 +80,64 @@ const NavBar = ({ children }) => {
                   ))}
                 </Menu>
               </Box>
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "none" },
-                  fontWeight: 800,
-                  color: theme.palette.secondary.main,
-                  textDecoration: "none",
-                  margin: "0",
-                }}
-              >
-                KMAX
-              </Typography>
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "none" },
-                  fontWeight: 800,
-                  color: theme.palette.primary.main,
-                  textDecoration: "none",
-                }}
-              >
-                Jewellery
-              </Typography>
+              <Logo mobileView={true} />
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                {pages.map((page) => (
-                  <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    sx={{
-                      my: 2,
-                      color: theme.palette.primary.main,
-                      display: "block",
-                      fontWeight: 700,
-                      fontSize: "24px",
-                    }}
-                  >
-                    {page}
-                  </Button>
-                ))}
+                <Button
+                  onClick={() => {
+                    navigate("/crumbs");
+                  }}
+                  sx={{
+                    my: 2,
+                    color: theme.palette.primary.main,
+                    display: "block",
+                    fontWeight: 700,
+                    fontSize: "24px",
+                  }}
+                >
+                  Crumbs
+                </Button>
+                <Button
+                  onClick={() => {
+                    navigate("/creations");
+                  }}
+                  sx={{
+                    my: 2,
+                    color: theme.palette.primary.main,
+                    display: "block",
+                    fontWeight: 700,
+                    fontSize: "24px",
+                  }}
+                >
+                  Creations
+                </Button>
+                <Button
+                  onClick={() => {
+                    navigate("/me");
+                  }}
+                  sx={{
+                    my: 2,
+                    color: theme.palette.primary.main,
+                    display: "block",
+                    fontWeight: 700,
+                    fontSize: "24px",
+                  }}
+                >
+                  Me
+                </Button>
+                <Button
+                  onClick={() => {
+                    navigate("/contact");
+                  }}
+                  sx={{
+                    my: 2,
+                    color: theme.palette.primary.main,
+                    display: "block",
+                    fontWeight: 700,
+                    fontSize: "24px",
+                  }}
+                >
+                  Contact
+                </Button>
               </Box>
 
               <Box sx={{ flexGrow: 0 }}>
@@ -194,35 +177,7 @@ const NavBar = ({ children }) => {
             >
               Copyright &copy;
             </Typography>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontWeight: 800,
-                color: theme.palette.secondary.main,
-                textDecoration: "none",
-                margin: "0",
-              }}
-            >
-              KMAX
-            </Typography>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontWeight: 800,
-                color: theme.palette.primary.main,
-                textDecoration: "none",
-              }}
-            >
-              Jewellery | {new Date().getFullYear()}
-            </Typography>
+            <Logo year={true} />
           </Box>
         </Box>
       </Box>

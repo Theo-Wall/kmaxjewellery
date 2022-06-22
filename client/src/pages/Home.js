@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import Image from "../../components/Image";
+import Image from "../components/Image";
 import { useTheme } from "@emotion/react";
 
 const Home = () => {

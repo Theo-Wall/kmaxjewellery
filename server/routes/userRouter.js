@@ -1,72 +1,74 @@
-import express from 'express'
-import cloudinary from '../utils/cloudinary.js'
-import upload from '../utils/multer.js'
+import express from "express";
+import cloudinary from "../utils/cloudinary.js";
+import upload from "../utils/multer.js";
 import {
   findUserAndUpdate,
   findAllUser,
   findUserByEmail,
-  findUserByCompanyName
-} from '../models/controller.js'
-import User from '../models/userModel.js'
-import bcrypt from 'bcrypt'
-const saltRounds = 10
-const router = express.Router()
+  findUserByCompanyName,
+} from "../models/controller.js";
+import User from "../models/userModel.js";
+import bcrypt from "bcrypt";
+const saltRounds = 10;
+const router = express.Router();
 
 //GET endpoint || description: http://localhost:3001/api/welcome
-router.get('/welcome', (_, res) => {
-  res.send('Hello World!!!!')
-})
+router.get("/welcome", (_, res) => {
+  res.send("Hello World!!!!");
+});
 
 // GET endpoint || description: http://localhost:3001/user/getUser
-router.get('/getUser/:id', async (req, res) => {
-  const userId = req.params.id
-  const user = await User.findOne({ _id: userId })
+router.get("/getUser/:id", async (req, res) => {
+  const userId = req.params.id;
+  const user = await User.findOne({ _id: userId });
 
-  res.status(200).send(user)
-})
+  res.status(200).send(user);
+});
 
 // GET endpoint || description
-router.get('/getUserByCompanyName/:companyName', async (req, res) => {
-  console.log('req.params.companyName', req.params.companyName)
-  const companyName = req.params.companyName
-  const user = await User.findOne({ companyName: companyName })
-  res.status(200).send(user)
-})
+router.get("/getUserByCompanyName/:companyName", async (req, res) => {
+  console.log("req.params.companyName", req.params.companyName);
+  const companyName = req.params.companyName;
+  const user = await User.findOne({ companyName: companyName });
+  res.status(200).send(user);
+});
 
 // POST endpoint || description: takes data from userForm and sends to DB || http://localhost:3001/user/addUser
-router.post('/addUser', upload.single('image'), async (req, res) => {
+router.post("/addUser", upload.single("image"), async (req, res) => {
   try {
     // receives new profile data from front end
-    let incomingData = JSON.parse(req.body.formData)
+    let incomingData = JSON.parse(req.body.formData);
     // console.log('incomingData', incomingData)
     ///Verifying that user does not exist yet, before creating account
-    const userEmail = await findUserByEmail(incomingData.emailAddress)
+    const userEmail = await findUserByEmail(incomingData.emailAddress);
     if (userEmail) {
-      console.log('in duplicate user')
-      return res.status(400).send({ error: 'This email already exists' })
+      console.log("in duplicate user");
+      return res.status(400).send({ error: "This email already exists" });
     }
 
     const userCompanyName = await findUserByCompanyName(
       incomingData.companyName
-    )
+    );
     if (userCompanyName) {
-      console.log('in duplicate companyName')
-      return res.status(400).send({ error: 'This company name already exists' })
+      console.log("in duplicate companyName");
+      return res
+        .status(400)
+        .send({ error: "This company name already exists" });
     }
 
-    let newProfile = await new User(incomingData)
+    let newProfile = await new User(incomingData);
     /////////////MY NEW CODE //////////////////////
     if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path)
+      const result = await cloudinary.uploader.upload(req.file.path);
       // adds received data to User constructor
-      newProfile.photos[0] = result.secure_url
+      newProfile.photos[0] = result.secure_url;
     }
 
     //creating express account in stripe
     const account = await stripeConfig.accounts.create({
       email: newProfile.emailAddress,
-      country: 'CA',
-      type: 'express',
+      country: "CA",
+      type: "express",
       capabilities: {
         card_payments: { requested: true },
         transfers: { requested: true },
@@ -76,48 +78,48 @@ router.post('/addUser', upload.single('image'), async (req, res) => {
         name: newProfile.userName,
         product_description: newProfile.companyType,
       },
-    })
+    });
 
-    console.log('acounttttt', account)
+    console.log("acounttttt", account);
 
-    newProfile.stripeAccountId = account.id
-    console.log('newProfileeee', newProfile)
+    newProfile.stripeAccountId = account.id;
+    console.log("newProfileeee", newProfile);
 
     // saves new user data to users collection database
 
     bcrypt.genSalt(saltRounds, function (err, salt) {
       bcrypt.hash(newProfile.password, salt, async function (err, hash) {
-        newProfile.password = hash
-        const profile = await newProfile.save()
-        res.status(201).json(profile)
-      })
-    })
+        newProfile.password = hash;
+        const profile = await newProfile.save();
+        res.status(201).json(profile);
+      });
+    });
   } catch (err) {
-    console.log(err)
-    res.sendStatus(403)
+    console.log(err);
+    res.sendStatus(403);
   }
-})
+});
 
 // PUT endpoint || description: http://localhost:3001/user/updateUser
-router.put('/updateUser', upload.single('image'), async (req, res) => {
-  let incomingData = JSON.parse(req.body.formData)
-  let updateUserData
+router.put("/updateUser", upload.single("image"), async (req, res) => {
+  let incomingData = JSON.parse(req.body.formData);
+  let updateUserData;
   if (req.file) {
-    const result = await cloudinary.uploader.upload(req.file.path)
-    updateUserData = { ...incomingData, photos: [result.secure_url] }
+    const result = await cloudinary.uploader.upload(req.file.path);
+    updateUserData = { ...incomingData, photos: [result.secure_url] };
   } else {
-    updateUserData = incomingData
+    updateUserData = incomingData;
   }
-  console.log('updateUserData', updateUserData)
+  console.log("updateUserData", updateUserData);
 
-  const response = findUserAndUpdate(updateUserData._id, updateUserData)
-  res.send(response)
-})
+  const response = findUserAndUpdate(updateUserData._id, updateUserData);
+  res.send(response);
+});
 
 // get endpoint || description: http://localhost:3001/user/getAllUser
-router.get('/getAllUser', async (req, res) => {
-  const allUser = await findAllUser()
-  res.status(200).json(allUser)
-})
+router.get("/getAllUser", async (req, res) => {
+  const allUser = await findAllUser();
+  res.status(200).json(allUser);
+});
 
-export default router
+export default router;

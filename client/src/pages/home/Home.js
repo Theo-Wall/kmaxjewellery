@@ -1,23 +1,13 @@
-import './App.css';
+import { Box, Typography } from "@mui/material";
 
-function Home() {
+const Home = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box>
+      <Typography sx={{ color: "black", border: "1px solid pink" }}>
+        hello
+      </Typography>
+    </Box>
   );
-}
+};
 
 export default Home;

@@ -27,80 +27,89 @@ const NavBar = ({ children }) => {
 
   return (
     <>
-      <AppBar position="static" sx={{ background: "white", position: "fixed" }}>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontWeight: 800,
-                fontFamily: "Fira Sans",
-                // letterSpacing: ".3rem",
-                color: "#AC1F2D",
-                textDecoration: "none",
-                margin: "0",
-              }}
-            >
-              KMAX
-            </Typography>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontWeight: 800,
-                fontFamily: "Fira Sans",
-                // letterSpacing: ".3rem",
-                color: "black",
-                textDecoration: "none",
-              }}
-            >
-              Jewellery
-            </Typography>
-
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
+      <Box>
+        <AppBar
+          position="relative"
+          sx={{ background: "white", m: 0, boxShadow: 0 }}
+        >
+          <Container maxWidth="xl">
+            <Toolbar disableGutters>
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="/"
                 sx={{
-                  display: { xs: "block", md: "none" },
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontWeight: 800,
+                  fontFamily: "Fira Sans",
+                  // letterSpacing: ".3rem",
+                  color: "#AC1F2D",
+                  textDecoration: "none",
+                  margin: "0",
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center" sx={{fontFamily: "Fira Sans", fontWeight: 800}}>{page}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
+                KMAX
+              </Typography>
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="/"
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontWeight: 800,
+                  fontFamily: "Fira Sans",
+                  // letterSpacing: ".3rem",
+                  color: "black",
+                  textDecoration: "none",
+                }}
+              >
+                Jewellery
+              </Typography>
+
+              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{
+                    display: { xs: "block", md: "none" },
+                  }}
+                >
+                  {pages.map((page) => (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <Typography
+                        textAlign="center"
+                        sx={{ fontFamily: "Fira Sans", fontWeight: 800 }}
+                      >
+                        {page}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
               <Typography
                 variant="h6"
                 noWrap
@@ -134,36 +143,37 @@ const NavBar = ({ children }) => {
               >
                 Jewellery
               </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    color: "black",
-                    display: "block",
-                    fontFamily: "Fira Sans",
-                    fontWeight: 700,
-                    fontSize: "24px",
-                  }}
-                >
-                  {page}
-                </Button>
-              ))}
-            </Box>
+              <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+                {pages.map((page) => (
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      color: "black",
+                      display: "block",
+                      fontFamily: "Fira Sans",
+                      fontWeight: 700,
+                      fontSize: "24px",
+                    }}
+                  >
+                    {page}
+                  </Button>
+                ))}
+              </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Instagram">
-                <IconButton /*onClick={}*/ sx={{ p: 0 }}>
-                  <InstagramIcon sx={{fontSize: "50px"}} />
-                </IconButton>
-              </Tooltip>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-      {children}
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Instagram">
+                  <IconButton /*onClick={}*/ sx={{ p: 0 }}>
+                    <InstagramIcon sx={{ fontSize: "50px" }} />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
+        {children}
+      </Box>
     </>
   );
 };

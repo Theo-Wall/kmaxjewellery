@@ -71,8 +71,11 @@ const NavBar = ({ children }) => {
                   {pages.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                       <Typography
+                        onClick={() => {
+                          navigate(`/${page.toLowerCase()}`);
+                        }}
                         textAlign="center"
-                        sx={{ fontFamily: "Fira Sans", fontWeight: 800 }}
+                        sx={{ fontWeight: 800 }}
                       >
                         {page}
                       </Typography>
@@ -82,62 +85,23 @@ const NavBar = ({ children }) => {
               </Box>
               <Logo mobileView={true} />
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                <Button
-                  onClick={() => {
-                    navigate("/crumbs");
-                  }}
-                  sx={{
-                    my: 2,
-                    color: theme.palette.primary.main,
-                    display: "block",
-                    fontWeight: 700,
-                    fontSize: "24px",
-                  }}
-                >
-                  Crumbs
-                </Button>
-                <Button
-                  onClick={() => {
-                    navigate("/creations");
-                  }}
-                  sx={{
-                    my: 2,
-                    color: theme.palette.primary.main,
-                    display: "block",
-                    fontWeight: 700,
-                    fontSize: "24px",
-                  }}
-                >
-                  Creations
-                </Button>
-                <Button
-                  onClick={() => {
-                    navigate("/me");
-                  }}
-                  sx={{
-                    my: 2,
-                    color: theme.palette.primary.main,
-                    display: "block",
-                    fontWeight: 700,
-                    fontSize: "24px",
-                  }}
-                >
-                  Me
-                </Button>
-                <Button
-                  onClick={() => {
-                    navigate("/contact");
-                  }}
-                  sx={{
-                    my: 2,
-                    color: theme.palette.primary.main,
-                    display: "block",
-                    fontWeight: 700,
-                    fontSize: "24px",
-                  }}
-                >
-                  Contact
-                </Button>
+                {pages.map((page) => (
+                  <Button
+                    key={page}
+                    onClick={() => {
+                      navigate(`/${page.toLowerCase()}`);
+                    }}
+                    sx={{
+                      my: 2,
+                      color: theme.palette.primary.main,
+                      display: "block",
+                      fontWeight: 700,
+                      fontSize: "24px",
+                    }}
+                  >
+                    {page}
+                  </Button>
+                ))}
               </Box>
 
               <Box sx={{ flexGrow: 0 }}>

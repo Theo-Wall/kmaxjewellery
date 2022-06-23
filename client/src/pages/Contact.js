@@ -1,22 +1,68 @@
-import { Typography, Box, Grid } from "@mui/material";
+import { Typography, Box, Grid, TextField, Button } from "@mui/material";
+import EmailIcon from "@mui/icons-material/Email";
 import { useForm } from "react-hook-form";
 import { useTheme } from "@emotion/react";
 
 const Contact = () => {
   const theme = useTheme();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
 
   const LocalForm = () => {
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm();
+    const onSubmit = (data) => console.log(data);
     return (
-      <>
-        <Typography>form</Typography>
-      </>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Typography label="fname">Full Name:</Typography>
+        <TextField
+          fullWidth
+          id="fname"
+          type="text"
+          autoComplete="disabled"
+          error={errors?.fullName ? true : false}
+          helperText={errors?.fullName && "Name Required"}
+          {...register("fullName", { required: true, maxLength: 100 })}
+          sx={{ mb: "20px" }}
+        />
+        <Typography label="phone">Phone Number:</Typography>
+        <TextField
+          fullWidth
+          id="phone"
+          name="phone"
+          type="tel"
+          {...register("phoneNo")}
+          sx={{ mb: "20px" }}
+        />
+        <Typography label="email">Email Address:</Typography>
+        <TextField
+          fullWidth
+          id="email"
+          name="email"
+          type="email"
+          error={errors?.email ? true : false}
+          helperText={errors?.email && "Email Required"}
+          {...register("email", { required: true, maxLength: 100 })}
+          sx={{ mb: "20px" }}
+        />
+        <Typography label="message">Message:</Typography>
+        <TextField
+          fullWidth
+          id="message"
+          name="message"
+          type="text"
+          multiline
+          rows={10}
+          error={errors?.message ? true : false}
+          helperText={errors?.message && "Message Required"}
+          {...register("message", { required: true })}
+          sx={{ mb: "20px" }}
+        />
+        <Button type="submit" variant="outlined">
+          Send Message
+        </Button>
+      </form>
     );
   };
 
@@ -41,6 +87,7 @@ const Contact = () => {
                 fontWeight: 600,
                 color: theme.palette.primary.main,
                 fontSize: "24px",
+                mb: "20px",
               }}
             >
               Send Us a Message
@@ -50,7 +97,20 @@ const Contact = () => {
         </Grid>
         <Grid item xs={5}>
           <Box sx={{ m: "20px 0 10px 55px" }}>
-            <Typography>other side</Typography>
+            <Typography
+              sx={{
+                fontWeight: 600,
+                color: theme.palette.primary.main,
+                fontSize: "24px",
+                mb: "20px",
+              }}
+            >
+              Contact Details
+            </Typography>
+            <Box sx={{ display: "flex" }}>
+              <EmailIcon />
+              <Typography>&nbsp;E:</Typography>
+            </Box>
           </Box>
         </Grid>
       </Grid>

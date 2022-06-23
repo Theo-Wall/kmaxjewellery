@@ -22,7 +22,9 @@ const Contact = () => {
     };
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Typography label="fname">Full Name:</Typography>
+        <Typography label="fname" sx={{ fontWeight: 600 }}>
+          Full Name:
+        </Typography>
         <TextField
           fullWidth
           id="fname"
@@ -33,7 +35,9 @@ const Contact = () => {
           {...register("fullName", { required: true, maxLength: 100 })}
           sx={{ mb: "20px" }}
         />
-        <Typography label="phone">Phone Number:</Typography>
+        <Typography label="phone" sx={{ fontWeight: 600 }}>
+          Phone Number:
+        </Typography>
         <TextField
           fullWidth
           id="phone"
@@ -42,7 +46,9 @@ const Contact = () => {
           {...register("phoneNo")}
           sx={{ mb: "20px" }}
         />
-        <Typography label="email">Email Address:</Typography>
+        <Typography label="email" sx={{ fontWeight: 600 }}>
+          Email Address:
+        </Typography>
         <TextField
           fullWidth
           id="email"
@@ -53,7 +59,9 @@ const Contact = () => {
           {...register("email", { required: true, maxLength: 100 })}
           sx={{ mb: "20px" }}
         />
-        <Typography label="message">Message:</Typography>
+        <Typography label="message" sx={{ fontWeight: 600 }}>
+          Message:
+        </Typography>
         <TextField
           fullWidth
           id="message"
@@ -66,7 +74,7 @@ const Contact = () => {
           {...register("message", { required: true })}
           sx={{ mb: "20px" }}
         />
-        <Button type="submit" variant="outlined">
+        <Button type="submit" variant="outlined" sx={{ fontWeight: 600 }}>
           Send Message
         </Button>
       </form>

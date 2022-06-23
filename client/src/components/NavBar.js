@@ -113,7 +113,13 @@ const NavBar = ({ children }) => {
                         "_blank"
                       );
                     }}
-                    sx={{ p: 0 }}
+                    sx={{
+                      p: 0,
+                      ":hover": {
+                        cursor: "pointer",
+                        color: theme.palette.secondary.main,
+                      },
+                    }}
                   >
                     <InstagramIcon sx={{ fontSize: "50px" }} />
                   </IconButton>

@@ -9,6 +9,7 @@ import path from "path";
 const __dirname = path.resolve();
 
 import userRouter from "./routes/userRouter.js";
+import emailRouter from "./routes/emailRouter.js";
 
 const app = express();
 dotenv.config({ path: "./config/config.env" });
@@ -50,6 +51,7 @@ connectDb();
 // app.use('/saleItem', saleItemRouter)
 // app.use('/media', mediaRouter)
 app.use("/user", userRouter);
+app.use("/email", emailRouter);
 // app.use('/auth', authRoutes)
 // app.use('/payment', paymentRouter)
 // app.use('/saleData', saleDataRouter)

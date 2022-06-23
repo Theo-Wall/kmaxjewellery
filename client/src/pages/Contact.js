@@ -2,6 +2,8 @@ import { Typography, Box, Grid, TextField, Button } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import { useForm } from "react-hook-form";
 import { useTheme } from "@emotion/react";
+import axios from "axios";
+// import { useSendEmail } from "../hooks/useSendEmail";
 
 const Contact = () => {
   const theme = useTheme();
@@ -12,7 +14,12 @@ const Contact = () => {
       handleSubmit,
       formState: { errors },
     } = useForm();
-    const onSubmit = (data) => console.log(data);
+
+    const onSubmit = async (data) => {
+      console.log("data", data);
+      const response = await axios.post("email/sendEmail", data);
+      console.log("response", response);
+    };
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Typography label="fname">Full Name:</Typography>

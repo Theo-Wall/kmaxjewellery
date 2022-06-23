@@ -48,7 +48,7 @@ const Logo = ({ year, mobileView }) => {
           textDecoration: "none",
         }}
       >
-        Jewellery{year && ` |  ${new Date().getFullYear()}`}
+        jewellery{year && ` |  ${new Date().getFullYear()}`}
       </Typography>
     </Box>
   );

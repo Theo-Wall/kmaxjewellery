@@ -106,7 +106,15 @@ const NavBar = ({ children }) => {
 
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Instagram">
-                  <IconButton /*onClick={}*/ sx={{ p: 0 }}>
+                  <IconButton
+                    onClick={() => {
+                      window.open(
+                        "https://www.instagram.com/kmkry1/",
+                        "_blank"
+                      );
+                    }}
+                    sx={{ p: 0 }}
+                  >
                     <InstagramIcon sx={{ fontSize: "50px" }} />
                   </IconButton>
                 </Tooltip>
@@ -139,7 +147,7 @@ const NavBar = ({ children }) => {
                 textDecoration: "none",
               }}
             >
-              Copyright &copy;
+              Copyright &copy;&nbsp;
             </Typography>
             <Logo year={true} />
           </Box>

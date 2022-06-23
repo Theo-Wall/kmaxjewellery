@@ -155,6 +155,7 @@ const NavBar = ({ children }) => {
             >
               Copyright &copy;&nbsp;
             </Typography>
+            <Logo year={true} mobileView={true} />
             <Logo year={true} />
           </Box>
         </Box>

@@ -83,10 +83,10 @@ const Contact = () => {
         </Typography>
       </Box>
       <Grid container spacing={2}>
-        <Grid item xs={7}>
+        <Grid item xs={12} md={7}>
           <Box
             sx={{
-              m: "20px 0 10px 55px",
+              m: "20px 55px 10px 55px",
             }}
           >
             <Typography
@@ -102,7 +102,7 @@ const Contact = () => {
             <LocalForm />
           </Box>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item md={5} sx={{ display: { xs: "none", md: "flex" } }}>
           <Box sx={{ m: "20px 0 10px 55px" }}>
             <Typography
               sx={{

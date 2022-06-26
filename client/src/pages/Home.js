@@ -15,20 +15,24 @@ const Home = () => {
           sx={{
             display: "flex",
             justifyContent: "center",
-            margin: "100px 0 100px 0",
+            margin: "70px 0 10px 0",
           }}
         />
       </Box>
       <Box>
-        <Typography
+        <Image
+          src={
+            "https://res.cloudinary.com/ddcynhc98/image/upload/v1656210507/20220625_201856_q0gyko.jpg"
+          }
+          alt={"KMAXJewellery logo"}
+          loading={"lazy"}
           sx={{
             display: "flex",
             justifyContent: "center",
-            margin: "200px 0 200px 0",
+            margin: "10px 0 10px 0",
+            height: "500px",
           }}
-        >
-          Pick Image for here
-        </Typography>
+        />
         <Typography
           variant="h4"
           sx={{
@@ -38,7 +42,7 @@ const Home = () => {
             color: theme.palette.primary.main,
           }}
         >
-          Description of image
+          The Return of the Bison
         </Typography>
         <Typography
           variant="h6"
@@ -49,7 +53,8 @@ const Home = () => {
             color: theme.palette.primary.main,
           }}
         >
-          subtext for image
+          Absent from our landscape for over 140 years, the heard at Panther
+          Valley are now free to roam, breed and birth 'little reds'
         </Typography>
       </Box>
       <Box

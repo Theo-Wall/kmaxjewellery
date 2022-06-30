@@ -2,7 +2,6 @@ import { Typography, Box, Grid, TextField, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useTheme } from "@emotion/react";
 import axios from "axios";
-// import { useSendEmail } from "../hooks/useSendEmail";
 
 const Contact = () => {
   const theme = useTheme();
@@ -85,7 +84,14 @@ const Contact = () => {
       <Box
         sx={{ padding: "0 15px 0 15px", borderBottom: "1px solid lightGrey" }}
       >
-        <Typography variant="h4" sx={{ fontWeight: 600, ml: "40px" }}>
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: 600,
+            ml: "50px",
+            color: theme.palette.primary.main,
+          }}
+        >
           Contact
         </Typography>
       </Box>

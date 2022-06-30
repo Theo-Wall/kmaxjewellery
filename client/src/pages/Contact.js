@@ -1,5 +1,4 @@
 import { Typography, Box, Grid, TextField, Button } from "@mui/material";
-import EmailIcon from "@mui/icons-material/Email";
 import { useForm } from "react-hook-form";
 import { useTheme } from "@emotion/react";
 import axios from "axios";
@@ -91,10 +90,10 @@ const Contact = () => {
         </Typography>
       </Box>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={7}>
+        <Grid item xs={12} md={12}>
           <Box
             sx={{
-              m: "20px 55px 10px 55px",
+              m: "20px 100px 10px 100px",
             }}
           >
             <Typography
@@ -108,24 +107,6 @@ const Contact = () => {
               Send Us a Message
             </Typography>
             <LocalForm />
-          </Box>
-        </Grid>
-        <Grid item md={5} sx={{ display: { xs: "none", md: "flex" } }}>
-          <Box sx={{ m: "20px 0 10px 55px" }}>
-            <Typography
-              sx={{
-                fontWeight: 600,
-                color: theme.palette.primary.main,
-                fontSize: "24px",
-                mb: "20px",
-              }}
-            >
-              Contact Details
-            </Typography>
-            <Box sx={{ display: "flex" }}>
-              <EmailIcon />
-              <Typography>&nbsp;E:</Typography>
-            </Box>
           </Box>
         </Grid>
       </Grid>

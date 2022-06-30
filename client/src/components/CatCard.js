@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 export default function CatCard({ name, img }) {
   return (
     <Card sx={{ width: "300px", height: "350px" }}>
-      <CardMedia component="img" height="250" image={img} alt={name} />
+      <CardMedia component="img" height="280" image={img} alt={name} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div" color="secondary">
           {name}

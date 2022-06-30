@@ -11,6 +11,11 @@ const categories = [
 
 const Creations = () => {
   const theme = useTheme();
+
+  const displayItemsHandler = (cat) => {
+    console.log(cat);
+  };
+
   return (
     <Box sx={{ margin: "100px 15px 100px 15px" }}>
       <Box
@@ -40,10 +45,17 @@ const Creations = () => {
           alignItems="center"
           spacing={2}
         >
-          {categories.map((cat) => {
+          {categories.map((cat, index) => {
             return (
               <Grid item>
-                <CatCard key={cat.name} name={cat.name} img={cat.img} />
+                <Box
+                  onClick={(e) => {
+                    displayItemsHandler(cat);
+                  }}
+                  sx={{ "&:hover": { cursor: "pointer" } }}
+                >
+                  <CatCard key={cat.name} name={cat.name} img={cat.img} />
+                </Box>
               </Grid>
             );
           })}

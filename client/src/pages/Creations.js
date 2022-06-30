@@ -1,5 +1,8 @@
 import { Typography, Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import MediaCard from "../components/MediaCard";
+
+const categories = ["Neck", "Lapel", "Essentials", "Large Objects"];
 
 const Creations = () => {
   const theme = useTheme();
@@ -23,6 +26,9 @@ const Creations = () => {
         >
           Featuring
         </Typography>
+      </Box>
+      <Box sx={{ margin: 2 }}>
+        <MediaCard />
       </Box>
     </Box>
   );

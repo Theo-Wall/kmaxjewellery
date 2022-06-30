@@ -1,19 +1,29 @@
 import { Typography, Box, Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import { useNavigate } from "react-router-dom";
 import CatCard from "../components/CatCard";
 
 const categories = [
-  { name: "Neck", img: "/images/glacialis_327x327.jpeg" },
-  { name: "Lapel", img: "/images/victorian_brooch_327x327.jpeg" },
-  { name: "Essentials", img: "/images/17_327x327.jpeg" },
-  { name: "Large Objects", img: "/images/18_327x327.jpeg" },
+  { name: "Neck", img: "/images/glacialis_327x327.jpeg", page: "neckpieces" },
+  {
+    name: "Lapel",
+    img: "/images/victorian_brooch_327x327.jpeg",
+    page: "lapel",
+  },
+  { name: "Essentials", img: "/images/17_327x327.jpeg", page: "essentials" },
+  {
+    name: "Large Objects",
+    img: "/images/18_327x327.jpeg",
+    page: "largepieces",
+  },
 ];
 
 const Creations = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const displayItemsHandler = (cat) => {
-    console.log(cat);
+    navigate(`/creations/${cat.page}`);
   };
 
   return (

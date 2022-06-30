@@ -7,15 +7,16 @@ const Me = () => {
   return (
     <Box sx={{ margin: "100px 0 100px 0" }}>
       <Grid container spacing={2}>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4} sx={{ display: { xs: "none", md: "flex" } }}>
           <Image
             src={"images/the_artist_image_1.jpeg"}
             alt={"artist image"}
             loading={"lazy"}
+            width={"350px"}
             sx={{ ml: "24px" }}
           />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={8}>
           <Box sx={{ padding: "20px 100px 20px 100px" }}>
             <Typography
               variant="h3"

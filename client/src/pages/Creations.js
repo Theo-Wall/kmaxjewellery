@@ -1,8 +1,13 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import MediaCard from "../components/MediaCard";
+import CatCard from "../components/CatCard";
 
-const categories = ["Neck", "Lapel", "Essentials", "Large Objects"];
+const categories = [
+  { name: "Neck", img: "/images/glacialis_327x327.jpeg" },
+  { name: "Lapel", img: "/images/victorian_brooch_327x327.jpeg" },
+  { name: "Essentials", img: "/images/17_327x327.jpeg" },
+  { name: "Large Objects", img: "/images/18_327x327.jpeg" },
+];
 
 const Creations = () => {
   const theme = useTheme();
@@ -27,8 +32,22 @@ const Creations = () => {
           Featuring
         </Typography>
       </Box>
-      <Box sx={{ margin: 2 }}>
-        <MediaCard />
+      <Box sx={{ display: "flex", margin: 2 }}>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-around"
+          alignItems="center"
+          spacing={2}
+        >
+          {categories.map((cat) => {
+            return (
+              <Grid item>
+                <CatCard key={cat.name} name={cat.name} img={cat.img} />
+              </Grid>
+            );
+          })}
+        </Grid>
       </Box>
     </Box>
   );

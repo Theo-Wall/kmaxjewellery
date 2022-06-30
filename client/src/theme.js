@@ -11,6 +11,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "Fira Sans",
+    fontWeightRegular: 600,
   },
 });
 

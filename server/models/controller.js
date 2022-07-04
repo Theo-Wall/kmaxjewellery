@@ -1,34 +1,32 @@
-import User from './userModel.js'
-import Media from './mediaModel.js'
-
+import User from "./userModel.js";
+// import Media from './cardModel.js'
 
 // Controller for Data Models
 
 // USER FUNCTIONS
 
-
 export async function findUserByEmail(email) {
-  let profile = await User.findOne({ emailAddress: email })
-  return profile
+  let profile = await User.findOne({ emailAddress: email });
+  return profile;
 }
 
 export async function findUserByCompanyName(companyName) {
-  let profile = await User.findOne({companyName: companyName})
-  return profile
+  let profile = await User.findOne({ companyName: companyName });
+  return profile;
 }
 
 export async function findUserById(id) {
   try {
-    let user = await User.findById(id)
-    return user
+    let user = await User.findById(id);
+    return user;
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 }
 
 export async function findUserAndUpdate(id, userData) {
-  let updatedUser = await User.findByIdAndUpdate(id, userData)
-  return updatedUser
+  let updatedUser = await User.findByIdAndUpdate(id, userData);
+  return updatedUser;
 }
 
 // SALE ITEM FUNCTIONS
@@ -50,20 +48,20 @@ export async function findUserAndUpdate(id, userData) {
 
 // MEDIA FUNCTIONS
 
-export async function findMediaAndDelete(id) {
-  let deletedSaleItem = await Media.findByIdAndDelete(id)
-  return deletedSaleItem
-}
+// export async function findMediaAndDelete(id) {
+//   let deletedSaleItem = await Media.findByIdAndDelete(id);
+//   return deletedSaleItem;
+// }
 
-export async function findMediaAndUpdate(id, mediaData) {
-  let updatedMedia = await Media.findByIdAndUpdate(id, mediaData)
-  return updatedMedia
-}
+// export async function findMediaAndUpdate(id, mediaData) {
+//   let updatedMedia = await Media.findByIdAndUpdate(id, mediaData);
+//   return updatedMedia;
+// }
 
-export async function findAllUser() {
-  let allUser = await User.find({})
-  return allUser
-}
+// export async function findAllUser() {
+//   let allUser = await User.find({});
+//   return allUser;
+// }
 
 // SALE DATA FUNCTIONS
 

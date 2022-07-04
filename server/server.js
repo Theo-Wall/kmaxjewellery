@@ -10,6 +10,7 @@ const __dirname = path.resolve();
 
 import userRouter from "./routes/userRouter.js";
 import emailRouter from "./routes/emailRouter.js";
+import saleItemRouter from "./routes/saleItemRouter.js";
 
 const app = express();
 dotenv.config({ path: "./config/config.env" });
@@ -25,9 +26,9 @@ app.use((req, res, next) => {
   }
 });
 
-//app.use(json())
-//app.use(bodyParser.urlencoded({ extended: false }))
-//app.use(bodyParser.json())
+// app.use(json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 app.use(
   session({ secret: "meow-meow", resave: true, saveUninitialized: true })
 );
@@ -48,7 +49,7 @@ connectDb();
 
 /////////////////////ROUTES//////////////
 //description: http://localhost:3001/
-// app.use('/saleItem', saleItemRouter)
+app.use("/saleItem", saleItemRouter);
 // app.use('/media', mediaRouter)
 app.use("/user", userRouter);
 app.use("/email", emailRouter);

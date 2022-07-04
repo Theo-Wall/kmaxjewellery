@@ -6,6 +6,7 @@ import ImageUploading from "react-images-uploading";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./ItemModal.css";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -26,15 +27,20 @@ export default function ItemModal({ open, setOpen, cat }) {
   const [images, setImages] = useState([]);
   const maxNumber = 69;
 
-  const onChange = (imageList, addUpdateIndex) => {
+  const onChange = (event) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
-    setImages(imageList);
+    console.log(event.target.files);
+    setImages(event.target.files);
   };
 
   const onSubmit = async (data) => {
-    console.log("data", data);
-    console.log("images", images);
+    data.category = cat;
+    const itemData = new FormData();
+    itemData.append("image", images);
+    itemData.append("formData", JSON.stringify(data));
+
+    const createPostResponse = await axios.post("/saleItem/upload", itemData);
+    console.log("createPostResponse", createPostResponse);
   };
 
   const {
@@ -47,7 +53,20 @@ export default function ItemModal({ open, setOpen, cat }) {
   const LocalForm = () => {
     return (
       <>
-        <ImageUploading
+        <input
+          id="photos"
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={(event) => setImages(event.target.files[0])}
+          multiple={false}
+        />
+        {/* {images.map((image) =>
+          console.log("image", image) */}
+        {/* <img src={images.webkitRelativePath} alt="" width="100" /> */}
+        {/* )} */}
+
+        {/* <ImageUploading
           multiple
           value={images}
           onChange={onChange}
@@ -85,7 +104,7 @@ export default function ItemModal({ open, setOpen, cat }) {
               ))}
             </div>
           )}
-        </ImageUploading>
+        </ImageUploading> */}
         <form onSubmit={handleSubmit(onSubmit)}>
           <Typography label="title" sx={{ fontWeight: 600 }}>
             Title:

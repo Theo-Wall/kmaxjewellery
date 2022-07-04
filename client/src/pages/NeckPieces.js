@@ -1,12 +1,24 @@
 import { Box, Typography, Button, Grid } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ItemModal from "../components/ItemModal";
+import ItemCard from "../components/ItemCard";
 import { useTheme } from "@emotion/react";
+import axios from "axios";
 
 const NeckPieces = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [cat, setCat] = useState("");
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    console.log("in effect", cat);
+    const fetchData = async () => {
+      const response = await axios.get(`/saleItem/cards/neckpieces`);
+      setCards(response.data);
+    };
+    fetchData();
+  }, []);
 
   const addHandler = (cat) => {
     console.log("cat", cat);
@@ -64,20 +76,20 @@ const NeckPieces = () => {
             alignItems="center"
             spacing={2}
           >
-            {/* {categories.map((cat, index) => {
-            return (
-              <Grid item>
-                <Box
-                  onClick={(e) => {
-                    displayItemsHandler(cat);
-                  }}
-                  sx={{ "&:hover": { cursor: "pointer" } }}
-                >
-                  <CatCard key={cat.name} name={cat.name} img={cat.img} />
-                </Box>
-              </Grid>
-            );
-          })} */}
+            {cards.map((item) => {
+              return (
+                <Grid item>
+                  <Box
+                    // onClick={(e) => {
+                    //   displayItemsHandler(cat);
+                    // }}
+                    sx={{ "&:hover": { cursor: "pointer" } }}
+                  >
+                    <ItemCard item={item} />
+                  </Box>
+                </Grid>
+              );
+            })}
           </Grid>
         </Box>
       </Box>

@@ -10,25 +10,30 @@ const NeckPieces = () => {
   const [open, setOpen] = useState(false);
   const [cat, setCat] = useState("");
   const [cards, setCards] = useState([]);
+  const [editData, setEditData] = useState();
 
   useEffect(() => {
-    console.log("in effect", cat);
     const fetchData = async () => {
+      setCat("neckpieces");
       const response = await axios.get(`/saleItem/cards/neckpieces`);
       setCards(response.data);
     };
     fetchData();
   }, []);
 
-  const addHandler = (cat) => {
-    console.log("cat", cat);
-    setCat(cat);
+  const addHandler = () => {
     setOpen(true);
   };
 
   return (
     <>
-      <ItemModal open={open} setOpen={setOpen} cat={cat} />
+      <ItemModal
+        open={open}
+        setOpen={setOpen}
+        cat={cat}
+        editData={editData}
+        setEditData={setEditData}
+      />
       <Box sx={{ margin: "100px 15px 100px 15px" }}>
         <Box
           sx={{
@@ -49,7 +54,7 @@ const NeckPieces = () => {
             Neckpieces, Necklaces & Pendants
           </Typography>
         </Box>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           <Typography
             variant="h4"
             sx={{
@@ -62,7 +67,7 @@ const NeckPieces = () => {
           </Typography>
           <Button
             onClick={() => {
-              addHandler("neckpieces");
+              addHandler();
             }}
           >
             Add
@@ -79,18 +84,29 @@ const NeckPieces = () => {
             {cards.map((item) => {
               return (
                 <Grid item>
-                  <Box
-                    // onClick={(e) => {
-                    //   displayItemsHandler(cat);
-                    // }}
-                    sx={{ "&:hover": { cursor: "pointer" } }}
-                  >
-                    <ItemCard item={item} />
+                  <Box sx={{ "&:hover": { cursor: "pointer" } }}>
+                    <ItemCard
+                      item={item}
+                      setOpen={setOpen}
+                      setEditData={setEditData}
+                    />
                   </Box>
                 </Grid>
               );
             })}
           </Grid>
+        </Box>
+        <Box sx={{ display: "flex" }}>
+          <Typography
+            variant="h4"
+            sx={{
+              margin: 2,
+              fontWeight: 600,
+              color: theme.palette.primary.main,
+            }}
+          >
+            Past Creations
+          </Typography>
         </Box>
       </Box>
     </>

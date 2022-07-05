@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  Box,
   Card,
   CardActions,
   CardContent,
@@ -8,10 +7,21 @@ import {
   Button,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 
-export default function ItemCard({ item }) {
+export default function ItemCard({ item, setOpen, setEditData }) {
+  const handleEdit = (item) => {
+    setEditData(item);
+    setOpen(true);
+  };
+
+  const handleDelete = async (item) => {
+    const response = await axios.delete(`/saleItem/delete/${item._id}`);
+    console.log("response", response);
+  };
+
   return (
-    <Card sx={{ width: "300px", maxHeight: "700px" }}>
+    <Card sx={{ width: "300px", height: "500px" }}>
       <CardMedia
         component="img"
         height="280"
@@ -38,8 +48,22 @@ export default function ItemCard({ item }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Edit</Button>
-        <Button size="small">Delete</Button>
+        <Button
+          size="small"
+          onClick={() => {
+            handleEdit(item);
+          }}
+        >
+          Edit
+        </Button>
+        <Button
+          size="small"
+          onClick={() => {
+            handleDelete(item);
+          }}
+        >
+          Delete
+        </Button>
       </CardActions>
     </Card>
   );

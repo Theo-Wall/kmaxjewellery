@@ -14,7 +14,6 @@ router.get("/cards/:cat", async (req, res) => {
 
 router.post("/upload", upload.single("image"), async (req, res) => {
   const result = await cloudinary.uploader.upload(req.file.path);
-  console.log("result", result);
 
   const itemData = JSON.parse(req.body.formData);
 
@@ -32,6 +31,38 @@ router.post("/upload", upload.single("image"), async (req, res) => {
   const newSavedCard = await newCard.save();
 
   res.send(newSavedCard).status(200);
+});
+
+router.post("/edit/:id", upload.single("image"), async (req, res) => {
+  const id = req.params.id;
+  const itemData = JSON.parse(req.body.formData);
+
+  if (req.file?.path) {
+    const result = await cloudinary.uploader.upload(req.file.path);
+
+    const response = await Card.findByIdAndUpdate(id, {
+      ...itemData,
+      images: [result.secure_url],
+      lastEditedZ: new Date(),
+    });
+
+    res.send(response).status(200);
+  } else {
+    const response = await Card.findByIdAndUpdate(id, {
+      ...itemData,
+      lastEditedZ: new Date(),
+    });
+
+    res.send(response).status(200);
+  }
+});
+
+router.delete("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const response = await Card.findByIdAndDelete(id);
+
+  res.send(response);
 });
 
 export default router;

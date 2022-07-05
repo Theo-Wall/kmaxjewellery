@@ -8,6 +8,7 @@ import NeckPieces from "./pages/NeckPieces";
 import Lapel from "./pages/Lapel";
 import Essentials from "./pages/Essentials";
 import LargePieces from "./pages/LargePieces";
+import ItemDisplay from "./pages/ItemDisplay";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -36,6 +37,10 @@ const App = () => {
         <Route
           path="/creations/largepieces"
           element={<NavBar children={<LargePieces />} />}
+        />
+        <Route
+          path="/creations/display/:id"
+          element={<NavBar children={<ItemDisplay />} />}
         />
         <Route path="/me" element={<NavBar children={<Me />} />} />
         <Route path="/contact" element={<NavBar children={<Contact />} />} />

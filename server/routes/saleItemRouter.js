@@ -1,9 +1,14 @@
 import express from "express";
-import fetch from "node-fetch";
 import cloudinary from "../utils/cloudinary.js";
-import Card from "../models/cardModel.js";
+import Card from "../models/mediaModel.js";
 import upload from "../utils/multer.js";
 const router = express.Router();
+
+router.get("/:id", async (req, res) => {
+  const id = JSON.parse(req.params.id);
+  const item = await Card.findOne(id);
+  res.send(item).status(200);
+});
 
 router.get("/cards/:cat", async (req, res) => {
   const category = req.params.cat;

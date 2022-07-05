@@ -57,7 +57,7 @@ const Creations = () => {
         >
           {categories.map((cat, index) => {
             return (
-              <Grid item>
+              <Grid item key={`${cat} ${index}`}>
                 <Box
                   onClick={(e) => {
                     displayItemsHandler(cat);

@@ -1,8 +1,15 @@
 import { Box, Grid } from "@mui/material";
 import ItemModal from "../components/ItemModal";
 import ItemCard from "../components/ItemCard";
+import { useNavigate } from "react-router-dom";
 
 const CardDisplay = ({ open, setOpen, cat, editData, setEditData, cards }) => {
+  const navigate = useNavigate();
+  const handleDisplay = (item) => {
+    console.log("e", item);
+    navigate(`/creations/display/${item._id}`);
+  };
+
   return (
     <>
       <ItemModal
@@ -23,7 +30,12 @@ const CardDisplay = ({ open, setOpen, cat, editData, setEditData, cards }) => {
           {cards.map((item, index) => {
             return (
               <Grid item key={`${cat} ${index}`}>
-                <Box sx={{ "&:hover": { cursor: "pointer" } }}>
+                <Box
+                  onClick={() => {
+                    handleDisplay(item);
+                  }}
+                  sx={{ "&:hover": { cursor: "pointer" } }}
+                >
                   <ItemCard
                     item={item}
                     setOpen={setOpen}

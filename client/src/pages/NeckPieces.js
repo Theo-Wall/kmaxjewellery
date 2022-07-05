@@ -72,7 +72,7 @@ const NeckPieces = () => {
           <Grid
             container
             direction="row"
-            justifyContent="space-around"
+            justifyContent="flex-start"
             alignItems="center"
             spacing={2}
           >

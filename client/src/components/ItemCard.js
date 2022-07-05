@@ -9,7 +9,12 @@ import {
 } from "@mui/material";
 import axios from "axios";
 
-export default function ItemCard({ item, setOpen, setEditData }) {
+export default function ItemCard({
+  item,
+  setOpen,
+  setEditData,
+  handleDisplay,
+}) {
   const handleEdit = (item) => {
     setEditData(item);
     setOpen(true);
@@ -27,9 +32,21 @@ export default function ItemCard({ item, setOpen, setEditData }) {
         height="280"
         image={item.images[0]}
         alt={item.title}
+        onClick={() => {
+          handleDisplay(item);
+        }}
+        sx={{ "&:hover": { cursor: "pointer" } }}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          onClick={() => {
+            handleDisplay(item);
+          }}
+          sx={{ "&:hover": { cursor: "pointer" } }}
+        >
           {item.title}
         </Typography>
 

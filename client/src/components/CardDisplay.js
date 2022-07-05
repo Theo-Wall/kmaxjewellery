@@ -30,16 +30,12 @@ const CardDisplay = ({ open, setOpen, cat, editData, setEditData, cards }) => {
           {cards.map((item, index) => {
             return (
               <Grid item key={`${cat} ${index}`}>
-                <Box
-                  onClick={() => {
-                    handleDisplay(item);
-                  }}
-                  sx={{ "&:hover": { cursor: "pointer" } }}
-                >
+                <Box>
                   <ItemCard
                     item={item}
                     setOpen={setOpen}
                     setEditData={setEditData}
+                    handleDisplay={handleDisplay}
                   />
                 </Box>
               </Grid>

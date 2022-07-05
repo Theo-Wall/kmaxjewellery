@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/:id", async (req, res) => {
   const id = JSON.parse(req.params.id);
-  const item = await Card.findOne(id);
+  const item = await Card.findOne({ _id: id.id });
   res.send(item).status(200);
 });
 

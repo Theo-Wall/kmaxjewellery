@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { useEffect, useState } from "react";
+import Image from "../components/Image";
 import axios from "axios";
 const ItemDisplay = () => {
   const theme = useTheme();
@@ -38,6 +39,28 @@ const ItemDisplay = () => {
           >
             {item ? item.title : ""}
           </Typography>
+        </Box>
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: 600,
+            ml: "50px",
+            color: theme.palette.primary.main,
+          }}
+        >
+          {item ? item.description : ""}
+        </Typography>
+        <Box sx={{ display: "flex", justifyContent: "center", width: "200px" }}>
+          <Image
+            src={item?.images[0]}
+            alt={"item here"}
+            loading={"lazy"}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "70px 0 10px 0",
+            }}
+          />
         </Box>
       </Box>
     </>

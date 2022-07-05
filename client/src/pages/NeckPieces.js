@@ -1,9 +1,9 @@
-import { Box, Typography, Button, Grid } from "@mui/material";
 import { useState, useEffect } from "react";
-import ItemModal from "../components/ItemModal";
-import ItemCard from "../components/ItemCard";
+import { Box, Typography, Button } from "@mui/material";
+
 import { useTheme } from "@emotion/react";
 import axios from "axios";
+import CardDisplay from "../components/CardDisplay";
 
 const NeckPieces = () => {
   const theme = useTheme();
@@ -27,13 +27,6 @@ const NeckPieces = () => {
 
   return (
     <>
-      <ItemModal
-        open={open}
-        setOpen={setOpen}
-        cat={cat}
-        editData={editData}
-        setEditData={setEditData}
-      />
       <Box sx={{ margin: "100px 15px 100px 15px" }}>
         <Box
           sx={{
@@ -73,29 +66,14 @@ const NeckPieces = () => {
             Add
           </Button>
         </Box>
-        <Box sx={{ display: "flex", margin: 2 }}>
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="center"
-            spacing={2}
-          >
-            {cards.map((item) => {
-              return (
-                <Grid item>
-                  <Box sx={{ "&:hover": { cursor: "pointer" } }}>
-                    <ItemCard
-                      item={item}
-                      setOpen={setOpen}
-                      setEditData={setEditData}
-                    />
-                  </Box>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Box>
+        <CardDisplay
+          open={open}
+          setOpen={setOpen}
+          cat={cat}
+          editData={editData}
+          setEditData={setEditData}
+          cards={cards}
+        />
         <Box sx={{ display: "flex" }}>
           <Typography
             variant="h4"

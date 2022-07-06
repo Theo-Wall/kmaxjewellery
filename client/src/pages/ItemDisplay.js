@@ -59,7 +59,7 @@ const ItemDisplay = () => {
         <Carousel>
           {images.map((image, i) => {
             return (
-              <Box sx={{ height: "400px" }}>
+              <Box sx={{ height: "400px" }} key={i}>
                 <Image
                   src={image}
                   alt={"item here"}

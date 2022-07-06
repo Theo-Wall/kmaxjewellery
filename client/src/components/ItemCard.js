@@ -22,7 +22,6 @@ export default function ItemCard({
 
   const handleDelete = async (item) => {
     const response = await axios.delete(`/saleItem/delete/${item._id}`);
-    console.log("response", response);
   };
 
   return (

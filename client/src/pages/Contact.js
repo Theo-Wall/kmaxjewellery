@@ -14,9 +14,7 @@ const Contact = () => {
     } = useForm();
 
     const onSubmit = async (data) => {
-      console.log("data", data);
       const response = await axios.post("email/sendEmail", data);
-      console.log("response", response);
     };
     return (
       <form onSubmit={handleSubmit(onSubmit)}>

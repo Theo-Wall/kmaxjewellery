@@ -7,14 +7,12 @@ import axios from "axios";
 const ItemDisplay = () => {
   const theme = useTheme();
   const id = useParams();
-  console.log("id", id);
 
   const [item, setItem] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`/saleItem/${JSON.stringify(id)}`);
-      console.log("response", response.data);
       setItem(response.data);
     };
     fetchData();
@@ -72,7 +70,7 @@ const ItemDisplay = () => {
           display: "flex",
           justifyContent: "center",
           margin: "10px 0 10px 0",
-          height: "500px",
+          height: "400px",
         }}
       />
     </>

@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const CardDisplay = ({ open, setOpen, cat, editData, setEditData, cards }) => {
   const navigate = useNavigate();
   const handleDisplay = (item) => {
-    console.log("e", item);
     navigate(`/creations/display/${item._id}`);
   };
 

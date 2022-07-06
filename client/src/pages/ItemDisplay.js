@@ -58,9 +58,6 @@ const ItemDisplay = () => {
       <Box sx={{ height: "500px" }}>
         <Carousel>
           {images.map((image, i) => {
-            {
-              console.log("image", image, i);
-            }
             return (
               <Box sx={{ height: "400px" }}>
                 <Image

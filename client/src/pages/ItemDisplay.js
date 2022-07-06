@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { useEffect, useState } from "react";
+import Carousel from "react-material-ui-carousel";
 import Image from "../components/Image";
 import axios from "axios";
 const ItemDisplay = () => {
@@ -9,10 +10,12 @@ const ItemDisplay = () => {
   const id = useParams();
 
   const [item, setItem] = useState();
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`/saleItem/${JSON.stringify(id)}`);
+      setImages(response.data.images);
       setItem(response.data);
     };
     fetchData();
@@ -52,27 +55,30 @@ const ItemDisplay = () => {
           {item ? item.description : ""}
         </Typography>
       </Box>
-
-      {/* </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          width: "200px",
-          ml: "50px",
-        }}
-      > */}
-      <Image
-        src={item?.images[0]}
-        alt={"item here"}
-        loading={"lazy"}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          margin: "10px 0 10px 0",
-          height: "400px",
-        }}
-      />
+      <Box sx={{ height: "500px" }}>
+        <Carousel>
+          {images.map((image, i) => {
+            {
+              console.log("image", image, i);
+            }
+            return (
+              <Box sx={{ height: "400px" }}>
+                <Image
+                  src={image}
+                  alt={"item here"}
+                  loading={"lazy"}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    margin: "10px 0 10px 0",
+                    height: "400px",
+                  }}
+                />
+              </Box>
+            );
+          })}
+        </Carousel>
+      </Box>
     </>
   );
 };

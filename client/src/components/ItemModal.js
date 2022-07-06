@@ -37,8 +37,6 @@ export default function ItemModal({ open, setOpen, cat, editData }) {
     }
   }, [editData]);
 
-  console.log("images", images);
-
   const handleImage = async (imageFile) => {
     const imageForm = new FormData();
     imageForm.append("image", imageFile);

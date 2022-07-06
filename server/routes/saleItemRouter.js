@@ -19,14 +19,14 @@ router.get("/cards/:cat", async (req, res) => {
 
 router.post("/upload", upload.single("image"), async (req, res) => {
   const result = await cloudinary.uploader.upload(req.file.path);
+  res.send(result.secure_url).status(200);
+});
 
-  const itemData = JSON.parse(req.body.formData);
-
-  itemData.images = ["testing url"];
+router.post("/post", async (req, res) => {
+  const itemData = req.body;
 
   const card = {
     ...itemData,
-    images: [result.secure_url],
     createdZ: new Date(),
     lastEditedZ: new Date(),
   };
@@ -38,28 +38,16 @@ router.post("/upload", upload.single("image"), async (req, res) => {
   res.send(newSavedCard).status(200);
 });
 
-router.post("/edit/:id", upload.single("image"), async (req, res) => {
+router.post("/edit/:id", async (req, res) => {
   const id = req.params.id;
-  const itemData = JSON.parse(req.body.formData);
+  const itemData = req.body;
 
-  if (req.file?.path) {
-    const result = await cloudinary.uploader.upload(req.file.path);
+  const response = await Card.findByIdAndUpdate(id, {
+    ...itemData,
+    lastEditedZ: new Date(),
+  });
 
-    const response = await Card.findByIdAndUpdate(id, {
-      ...itemData,
-      images: [result.secure_url],
-      lastEditedZ: new Date(),
-    });
-
-    res.send(response).status(200);
-  } else {
-    const response = await Card.findByIdAndUpdate(id, {
-      ...itemData,
-      lastEditedZ: new Date(),
-    });
-
-    res.send(response).status(200);
-  }
+  res.send(response).status(200);
 });
 
 router.delete("/delete/:id", async (req, res) => {

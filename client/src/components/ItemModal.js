@@ -2,9 +2,10 @@ import { TextField, Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import Image from "../components/Image";
 import "./ItemModal.css";
 import axios from "axios";
 
@@ -30,33 +31,43 @@ export default function ItemModal({ open, setOpen, cat, editData }) {
 
   const [images, setImages] = useState([]);
 
+  useEffect(() => {
+    if (editData) {
+      setImages(editData.images);
+    }
+  }, [editData]);
+
+  console.log("images", images);
+
+  const handleImage = async (imageFile) => {
+    const imageForm = new FormData();
+    imageForm.append("image", imageFile);
+    const uploadResponse = await axios.post("/saleItem/upload", imageForm);
+    if (uploadResponse) {
+      setImages([...images, uploadResponse.data]);
+    }
+  };
+
   const onSubmit = async (data) => {
     data.category = cat;
-    const itemData = new FormData();
-    itemData.append("image", images);
-    itemData.append("formData", JSON.stringify(data));
+    data.images = images;
     if (editData) {
       const editPostResponse = await axios.post(
         `/saleItem/edit/${editData._id}`,
-        itemData
+        data
       );
       if (editPostResponse) {
         navigate(0);
       }
     } else {
-      const createPostResponse = await axios.post("/saleItem/upload", itemData);
+      const createPostResponse = await axios.post("/saleItem/post", data);
       if (createPostResponse) {
         navigate(0);
       }
     }
   };
 
-  const {
-    register,
-    handleSubmit,
-    // formState: { errors },
-    // watch,
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const LocalForm = () => {
     return (
@@ -92,8 +103,20 @@ export default function ItemModal({ open, setOpen, cat, editData }) {
           <Button type="submit" variant="outlined" sx={{ fontWeight: 600 }}>
             {editData ? "Submit Edit" : "Submit Item"}
           </Button>
+          {editData && (
+            <Button
+              type="submit"
+              variant="outlined"
+              sx={{ fontWeight: 600, margin: 1 }}
+              onClick={() => {
+                setImages([]);
+              }}
+            >
+              Clear Images
+            </Button>
+          )}
         </form>
-        <Typography label="images" sx={{ fontWeight: 600 }}>
+        <Typography label="images" sx={{ fontWeight: 600, margin: 1 }}>
           Upload Images:
         </Typography>
         <input
@@ -101,9 +124,29 @@ export default function ItemModal({ open, setOpen, cat, editData }) {
           type="file"
           name="image"
           accept="image/*"
-          onChange={(event) => setImages(event.target.files[0])}
+          onChange={(e) => {
+            handleImage(e.target.files[0]);
+          }}
           multiple={false}
         />
+        <Box sx={{ display: "flex" }}>
+          {images.map((image, index) => {
+            return (
+              <Image
+                src={image}
+                alt={"KMAXJewellery image"}
+                loading={"lazy"}
+                key={index}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "10px 0 10px 0",
+                  height: "100px",
+                }}
+              />
+            );
+          })}
+        </Box>
       </>
     );
   };

@@ -92,19 +92,14 @@ const NavBar = ({ children }) => {
                       navigate(`/${page.toLowerCase()}`);
                     }}
                     sx={{
-                      mb: 2,
                       color: theme.palette.primary.main,
-                      display: "block",
                       fontWeight: 700,
                       fontSize: "24px",
-                      // button: {
-                      //   backgroundColor: "#3c52b2",
-                      //   color: "#fff",
-                      //   "&:hover": {
-                      //     backgroundColor: "#fff",
-                      //     color: "#3c52b2",
-                      //   },
-                      // },
+                      "&:hover": {
+                        background: "none",
+                        borderRadius: 0,
+                        borderBottom: "2px solid #AC1F2D",
+                      },
                     }}
                   >
                     {page}

@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Box, Typography, Button } from "@mui/material";
 
 import { useTheme } from "@emotion/react";
 import axios from "axios";
 import CardDisplay from "../components/CardDisplay";
 
-const NeckPieces = () => {
+const NeckPieces = ({ UserContext }) => {
   const theme = useTheme();
+  const user = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [cat, setCat] = useState("");
   const [cards, setCards] = useState([]);
@@ -58,13 +59,15 @@ const NeckPieces = () => {
           >
             New Creations
           </Typography>
-          <Button
-            onClick={() => {
-              addHandler();
-            }}
-          >
-            Add
-          </Button>
+          {user.emailAddress && (
+            <Button
+              onClick={() => {
+                addHandler();
+              }}
+            >
+              Add
+            </Button>
+          )}
         </Box>
         <CardDisplay
           open={open}
@@ -73,6 +76,7 @@ const NeckPieces = () => {
           editData={editData}
           setEditData={setEditData}
           cards={cards}
+          UserContext={UserContext}
         />
         <Box sx={{ display: "flex" }}>
           <Typography

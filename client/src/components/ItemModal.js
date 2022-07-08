@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Image from "../components/Image";
-import "./ItemModal.css";
 import axios from "axios";
 
 const style = {
@@ -161,11 +160,7 @@ export default function ItemModal({ open, setOpen, cat, editData }) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Add new item in {cat}
           </Typography>
-
           <LocalForm />
-          {/* <Box>
-              <ItemCard title={title} description={description} />
-            </Box> */}
         </Box>
       </Modal>
     </div>

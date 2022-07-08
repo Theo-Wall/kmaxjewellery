@@ -7,6 +7,7 @@ import {
   Button,
   Typography,
 } from "@mui/material";
+import { useContext } from "react";
 import axios from "axios";
 
 export default function ItemCard({
@@ -14,14 +15,17 @@ export default function ItemCard({
   setOpen,
   setEditData,
   handleDisplay,
+  UserContext,
 }) {
   const handleEdit = (item) => {
     setEditData(item);
     setOpen(true);
   };
 
+  const user = useContext(UserContext);
+
   const handleDelete = async (item) => {
-    const response = await axios.delete(`/saleItem/delete/${item._id}`);
+    await axios.delete(`/saleItem/delete/${item._id}`);
   };
 
   return (
@@ -63,24 +67,27 @@ export default function ItemCard({
           {item.description}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button
-          size="small"
-          onClick={() => {
-            handleEdit(item);
-          }}
-        >
-          Edit
-        </Button>
-        <Button
-          size="small"
-          onClick={() => {
-            handleDelete(item);
-          }}
-        >
-          Delete
-        </Button>
-      </CardActions>
+
+      {user.emailAddress && (
+        <CardActions>
+          <Button
+            size="small"
+            onClick={() => {
+              handleEdit(item);
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            size="small"
+            onClick={() => {
+              handleDelete(item);
+            }}
+          >
+            Delete
+          </Button>
+        </CardActions>
+      )}
     </Card>
   );
 }

@@ -1,11 +1,12 @@
 import { Box, Typography, Button } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useTheme } from "@emotion/react";
 import CardDisplay from "../components/CardDisplay";
 import axios from "axios";
 
-const Lapel = () => {
+const Lapel = ({ UserContext }) => {
   const theme = useTheme();
+  const user = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [cat, setCat] = useState("");
   const [cards, setCards] = useState([]);
@@ -55,13 +56,15 @@ const Lapel = () => {
         >
           New Creations
         </Typography>
-        <Button
-          onClick={() => {
-            addHandler();
-          }}
-        >
-          Add
-        </Button>
+        {user.emailAddress && (
+          <Button
+            onClick={() => {
+              addHandler();
+            }}
+          >
+            Add
+          </Button>
+        )}
       </Box>
       <CardDisplay
         open={open}
@@ -70,6 +73,7 @@ const Lapel = () => {
         editData={editData}
         setEditData={setEditData}
         cards={cards}
+        UserContext={UserContext}
       />
       <Box sx={{ display: "flex" }}>
         <Typography

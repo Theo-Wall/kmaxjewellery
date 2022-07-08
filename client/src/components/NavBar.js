@@ -1,25 +1,32 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Button,
+  Tooltip,
+  MenuItem,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import Logo from "./Logo";
+import LoginModal from "./LoginModal";
+import axios from "axios";
+import { useContext } from "react";
 import { useTheme } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
 
 const pages = ["Crumbs", "Creations", "Me", "Contact"];
 
-const NavBar = ({ children }) => {
+const NavBar = ({ children, UserContext }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [openLogin, setOpenLogin] = React.useState(false);
   const navigate = useNavigate();
+  const user = useContext(UserContext);
   const theme = useTheme();
 
   const handleOpenNavMenu = (event) => {
@@ -30,8 +37,18 @@ const NavBar = ({ children }) => {
     setAnchorElNav(null);
   };
 
+  const handleOpenLogin = () => setOpenLogin(true);
+
+  const handleLogout = async () => {
+    const response = await axios.get("/auth/logout");
+    if (response) {
+      navigate(0);
+    }
+  };
+
   return (
     <>
+      <LoginModal open={openLogin} setOpen={setOpenLogin} user={user} />
       <Box>
         <AppBar
           position="fixed"
@@ -160,6 +177,25 @@ const NavBar = ({ children }) => {
             </Typography>
             <Logo year={true} mobileView={true} />
             <Logo year={true} />
+            {user.emailAddress ? (
+              <Button
+                size="small"
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
+                Log Out
+              </Button>
+            ) : (
+              <Button
+                size="small"
+                onClick={() => {
+                  handleOpenLogin();
+                }}
+              >
+                Admin
+              </Button>
+            )}
           </Box>
         </Box>
       </Box>

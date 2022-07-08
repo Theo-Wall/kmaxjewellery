@@ -3,7 +3,15 @@ import ItemModal from "../components/ItemModal";
 import ItemCard from "../components/ItemCard";
 import { useNavigate } from "react-router-dom";
 
-const CardDisplay = ({ open, setOpen, cat, editData, setEditData, cards }) => {
+const CardDisplay = ({
+  open,
+  setOpen,
+  cat,
+  editData,
+  setEditData,
+  cards,
+  UserContext,
+}) => {
   const navigate = useNavigate();
   const handleDisplay = (item) => {
     navigate(`/creations/display/${item._id}`);
@@ -35,6 +43,7 @@ const CardDisplay = ({ open, setOpen, cat, editData, setEditData, cards }) => {
                     setOpen={setOpen}
                     setEditData={setEditData}
                     handleDisplay={handleDisplay}
+                    UserContext={UserContext}
                   />
                 </Box>
               </Grid>

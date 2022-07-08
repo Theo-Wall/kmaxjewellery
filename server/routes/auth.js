@@ -1,7 +1,6 @@
 import express from "express";
-import fetch from "node-fetch";
-import stripe from "stripe";
 import bcrypt from "bcrypt";
+import { findUserByEmail, findUserById } from "../models/controller.js";
 const router = express.Router();
 
 import passport from "passport";
@@ -21,12 +20,9 @@ passport.use(
     },
     // function call from passport receives username and password from inputs on front end
     function (username, password, done) {
-      console.log("passport is trying to verify user", username);
       // calls User model controller and finds user by email and compares 'usernameField' and 'passwordField' with User object
       findUserByEmail(username)
         .then((user) => {
-          console.log("storedPassword", user.password);
-          console.log("inputPassword", password);
           bcrypt.compare(password, user.password, function (err, result) {
             console.log("result", result);
             if (!user || !result) {
@@ -35,7 +31,6 @@ passport.use(
               });
               return;
             }
-            console.log("user", user);
             done(null, user);
           });
         })
@@ -69,7 +64,7 @@ router.post(
   passport.authenticate("local"),
   async function (req, res) {
     console.log("This is req.user", req.user);
-    res.send(req.user);
+    res.send(req.user.emailAddress);
   }
 );
 
@@ -78,6 +73,11 @@ router.get("/logout", function (req, res) {
   console.log("get server logout");
   req.logout();
   res.redirect("/");
+});
+
+// GET endpoint || when endpoint is called checks for user cookie in browser and returns user if there is
+router.get("/getLoggedInUser", async function (req, res) {
+  res.send(req.user);
 });
 
 export default router;

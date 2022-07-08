@@ -11,6 +11,7 @@ const __dirname = path.resolve();
 import userRouter from "./routes/userRouter.js";
 import emailRouter from "./routes/emailRouter.js";
 import saleItemRouter from "./routes/saleItemRouter.js";
+import authRouter from "./routes/auth.js";
 
 const app = express();
 dotenv.config({ path: "./config/config.env" });
@@ -53,7 +54,7 @@ app.use("/saleItem", saleItemRouter);
 // app.use('/media', mediaRouter)
 app.use("/user", userRouter);
 app.use("/email", emailRouter);
-// app.use('/auth', authRoutes)
+app.use("/auth", authRouter);
 // app.use('/payment', paymentRouter)
 // app.use('/saleData', saleDataRouter)
 app.use("/", express.static("../client/build"));

@@ -21,7 +21,6 @@ const ItemDisplay = () => {
     fetchData();
   }, [id]);
 
-  console.log("item", item?.description);
   return (
     <>
       <Box sx={{ margin: "100px 15px 15px 15px" }}>

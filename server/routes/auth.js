@@ -24,7 +24,6 @@ passport.use(
       findUserByEmail(username)
         .then((user) => {
           bcrypt.compare(password, user.password, function (err, result) {
-            console.log("result", result);
             if (!user || !result) {
               done(null, false, {
                 message: "Incorrect username/password.",
@@ -41,12 +40,10 @@ passport.use(
 
 // passport middle ware creates a cookie and saves it in the browser
 passport.serializeUser(function (user, done) {
-  console.log("passport wants to store this user in a cookie", user);
   done(null, user.id);
 });
 // passport middle ware checks if there is a cookie saved in the browser and returns logged in user
 passport.deserializeUser(function (id, done) {
-  // console.log('passport is trying to recover the user from a cookie')
   findUserById(id)
     .then((user) => {
       if (!user) {
@@ -63,14 +60,12 @@ router.post(
   "/login",
   passport.authenticate("local"),
   async function (req, res) {
-    console.log("This is req.user", req.user);
     res.send(req.user.emailAddress);
   }
 );
 
 // GET endpoint || endpoint logs out user
 router.get("/logout", function (req, res) {
-  console.log("get server logout");
   req.logout();
   res.redirect("/");
 });

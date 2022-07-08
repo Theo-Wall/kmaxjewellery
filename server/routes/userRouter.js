@@ -16,7 +16,6 @@ router.post("/addUser", async (req, res) => {
     bcrypt.genSalt(saltRounds, function (err, salt) {
       bcrypt.hash(newProfile.password, salt, async function (err, hash) {
         newProfile.password = hash;
-        console.log("newProfile", newProfile);
         // const profile = await newProfile.save();
         res.status(201).json(newProfile);
       });

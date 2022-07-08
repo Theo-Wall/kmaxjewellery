@@ -21,7 +21,6 @@ export default function LoginModal({ open, setOpen, user }) {
   const onSubmit = async (data) => {
     const response = await axios.post("/auth/login", data);
     if (response) {
-      console.log("response.data", response.data);
       user.setUser(response.data);
       setOpen(false);
     }

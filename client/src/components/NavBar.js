@@ -192,6 +192,12 @@ const NavBar = ({ children, UserContext }) => {
                 onClick={() => {
                   handleOpenLogin();
                 }}
+                sx={{
+                  "&:hover": {
+                    background: "none",
+                    borderRadius: 0,
+                  },
+                }}
               >
                 Admin
               </Button>

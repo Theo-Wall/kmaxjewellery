@@ -11,13 +11,25 @@ const NeckPieces = ({ UserContext }) => {
   const [open, setOpen] = useState(false);
   const [cat, setCat] = useState("");
   const [cards, setCards] = useState([]);
+  const [oldCards, setOldCards] = useState([]);
   const [editData, setEditData] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       setCat("neckpieces");
       const response = await axios.get(`/saleItem/cards/neckpieces`);
-      setCards(response.data);
+      if (response) {
+        setOldCards(
+          response.data.filter((card) => {
+            return card.oldWork;
+          })
+        );
+        setCards(
+          response.data.filter((card) => {
+            return !card.oldWork;
+          })
+        );
+      }
     };
     fetchData();
   }, []);
@@ -90,6 +102,15 @@ const NeckPieces = ({ UserContext }) => {
             Past Creations
           </Typography>
         </Box>
+        <CardDisplay
+          open={open}
+          setOpen={setOpen}
+          cat={cat}
+          editData={editData}
+          setEditData={setEditData}
+          cards={oldCards}
+          UserContext={UserContext}
+        />
       </Box>
     </>
   );

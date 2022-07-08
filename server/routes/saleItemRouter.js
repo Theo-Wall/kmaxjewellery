@@ -29,6 +29,24 @@ router.post("/post", async (req, res) => {
     ...itemData,
     createdZ: new Date(),
     lastEditedZ: new Date(),
+    oldWork: false,
+  };
+
+  const newCard = await new Card(card);
+
+  const newSavedCard = await newCard.save();
+
+  res.send(newSavedCard).status(200);
+});
+
+router.post("/postOld", async (req, res) => {
+  const itemData = req.body;
+
+  const card = {
+    ...itemData,
+    createdZ: new Date(),
+    lastEditedZ: new Date(),
+    oldWork: true,
   };
 
   const newCard = await new Card(card);

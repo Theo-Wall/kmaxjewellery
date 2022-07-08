@@ -48,7 +48,16 @@ export default function ItemCard({
           onClick={() => {
             handleDisplay(item);
           }}
-          sx={{ "&:hover": { cursor: "pointer" } }}
+          sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitLineClamp: "1",
+            WebkitBoxOrient: "vertical",
+            "&:hover": {
+              cursor: "pointer",
+            },
+          }}
         >
           {item.title}
         </Typography>

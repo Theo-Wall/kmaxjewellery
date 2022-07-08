@@ -9,6 +9,7 @@ const CardSchema = new mongoose.Schema({
   images: [String],
   createdZ: { type: Date, required: true },
   lastEditedZ: { type: Date, required: true },
+  oldWork: Boolean,
 });
 
 export default mongoose.model("Card", CardSchema);

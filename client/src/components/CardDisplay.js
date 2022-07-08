@@ -30,7 +30,7 @@ const CardDisplay = ({
         <Grid
           container
           direction="row"
-          justifyContent="flex-start"
+          justifyContent="center"
           alignItems="center"
           spacing={2}
         >

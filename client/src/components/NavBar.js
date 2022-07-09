@@ -141,7 +141,9 @@ const NavBar = ({ children, UserContext }) => {
                       },
                     }}
                   >
-                    <InstagramIcon sx={{ fontSize: "50px" }} />
+                    <InstagramIcon
+                      sx={{ fontSize: { xs: "40px", mb: "50px" } }}
+                    />
                   </IconButton>
                 </Tooltip>
               </Box>

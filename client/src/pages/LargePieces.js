@@ -51,7 +51,7 @@ const LargePieces = ({ UserContext }) => {
           variant="h4"
           sx={{
             fontWeight: 600,
-            ml: "50px",
+            ml: { xs: "10px", md: "50px" },
             color: theme.palette.primary.main,
           }}
         >

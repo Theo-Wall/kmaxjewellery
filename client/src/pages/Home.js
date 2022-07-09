@@ -30,7 +30,7 @@ const Home = () => {
             display: "flex",
             justifyContent: "center",
             margin: "10px 0 10px 0",
-            height: "500px",
+            height: { xs: "300px", md: "500px" },
           }}
         />
         <Typography
@@ -51,6 +51,7 @@ const Home = () => {
             justifyContent: "center",
             fontWeight: 600,
             color: theme.palette.primary.main,
+            marginLeft: "20px",
           }}
         >
           Absent from our landscape for over 140 years, the heard at Panther

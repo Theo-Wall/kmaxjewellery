@@ -17,7 +17,7 @@ const Me = () => {
           />
         </Grid>
         <Grid item xs={12} md={8}>
-          <Box sx={{ padding: "20px 100px 20px 100px" }}>
+          <Box sx={{ padding: { xs: "20px", md: "20px 100px 20px 100px" } }}>
             <Typography
               variant="h3"
               sx={{

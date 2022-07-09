@@ -86,7 +86,7 @@ const Contact = () => {
           variant="h4"
           sx={{
             fontWeight: 600,
-            ml: "50px",
+            ml: { xs: "10px", md: "50px" },
             color: theme.palette.primary.main,
           }}
         >
@@ -97,7 +97,7 @@ const Contact = () => {
         <Grid item xs={12} md={12}>
           <Box
             sx={{
-              m: "20px 100px 10px 100px",
+              m: { sx: "20px 20px 10px 20px", md: "20px 100px 10px 100px" },
             }}
           >
             <Typography

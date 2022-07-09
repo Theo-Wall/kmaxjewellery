@@ -50,7 +50,7 @@ export default function LoginModal({ open, setOpen, user }) {
           <TextField
             fullWidth
             id="password"
-            type="text"
+            type="password"
             size="small"
             autoComplete="disabled"
             {...register("password", { required: true, maxLength: 100 })}
